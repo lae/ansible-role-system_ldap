@@ -1,0 +1,9 @@
+---
+system_ldap_domain: FIREEYE.COM
+system_ldap_search_base: OU=Locations,DC=FireEye,DC=com
+system_ldap_uris:
+  - ldaps://srv-ussc-dc01e.fireeye.com:636
+  - ldaps://srv-ussc-dc02e.fireeye.com:636
+system_ldap_bind_dn: cn=MalwareResearch_LDAP,OU=Service Accounts,OU=Menlo Park,dc=FireEye,dc=com
+system_ldap_access_filter_groups:
+  - CN=FireEye-All,OU=Security Groups,OU=Milpitas,OU=United States,OU=Locations,DC=FireEye,DC=com

@@ -1,0 +1,90 @@
+---
+# tasks file for ansible-role-system_ldap
+- name: Install sssd and sssd-ldap
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - sssd
+    - sssd-ldap
+
+- yum:
+    name: http://builds.eng.fireeye.com/certs/fireeye-root-certs-1-1.noarch.rpm
+    state: present
+
+- name: Copy SSSD configuration file
+  template:
+    src: sssd.conf.j2
+    dest: /etc/sssd/sssd.conf
+    mode: 0600
+    backup: yes
+  notify:
+    - restart sssd
+
+- name: Query SSSD in nsswitch.conf
+  replace:
+    dest: /etc/nsswitch.conf
+    regexp: '^({{ item }}(?!.*\bsss\b).*)$'
+    replace: '\1 sss'
+    backup: yes
+  with_items:
+    - passwd
+    - shadow
+    - group
+    - services
+    - netgroup
+    - automount
+
+- name: Query SSSD in pam.d/password-auth-ac
+  lineinfile:
+    dest: /etc/pam.d/password-auth-ac
+    insertbefore: "{{ item.before }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - { before: "^auth.*pam_deny.so",
+        regexp: "^auth.*pam_sss.so",
+        line: "auth        sufficient    pam_sss.so use_first_pass" }
+    - { before: "",
+        regexp: "^account.*pam_unix.so",
+        line: "account     required      pam_unix.so broken_shadow" }
+    - { before: "^account.*pam_permit.so",
+        regexp: "^account.*pam.sss.so",
+        line: "account     [default=bad success=ok user_unknown=ignore] pam_sss.so" }
+    - { before: "^password.*pam_deny.so",
+        regexp: "^password.*pam_sss.so",
+        line: "password    sufficient    pam_sss.so use_authtok" }
+    - { before: "^session.*pam_succeed_if.so",
+        regexp: "^session.*pam_mkhomedir.so",
+        line: "session     optional      pam_mkhomedir.so umask=0077" }
+    - { before: EOF,
+        regexp: "^session.*pam_sss.so",
+        line: "session     optional      pam_sss.so" }
+
+- name: Query SSSD in pam.d/system-auth-ac
+  lineinfile:
+    dest: /etc/pam.d/system-auth-ac
+    insertbefore: "{{ item.before }}"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - { before: "^auth.*pam_deny.so",
+        regexp: "^auth.*pam_sss.so",
+        line: "auth        sufficient    pam_sss.so use_first_pass" }
+    - { before: "",
+        regexp: "^account.*pam_unix.so",
+        line: "account     required      pam_unix.so broken_shadow" }
+    - { before: "^account.*pam_permit.so",
+        regexp: "^account.*pam.sss.so",
+        line: "account     [default=bad success=ok user_unknown=ignore] pam_sss.so" }
+    - { before: "^password.*pam_deny.so",
+        regexp: "^password.*pam_sss.so",
+        line: "password    sufficient    pam_sss.so use_authtok" }
+    - { before: "^session.*pam_succeed_if.so",
+        regexp: "^session.*pam_mkhomedir.so",
+        line: "session     optional      pam_mkhomedir.so umask=0077" }
+    - { before: EOF,
+        regexp: "^session.*pam_sss.so",
+        line: "session     optional      pam_sss.so" }

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  remote_user: vagrant
+  roles:
+    - system_ldap
+  become: True
