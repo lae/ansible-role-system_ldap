@@ -7,6 +7,7 @@
   with_items:
     - sssd
     - sssd-ldap
+    - oddjob-mkhomedir
 
 - yum:
     name: http://builds.eng.fireeye.com/certs/fireeye-root-certs-1-1.noarch.rpm
@@ -56,8 +57,8 @@
         regexp: "^password.*pam_sss.so",
         line: "password    sufficient    pam_sss.so use_authtok" }
     - { before: "^session.*pam_succeed_if.so",
-        regexp: "^session.*pam_mkhomedir.so",
-        line: "session     optional      pam_mkhomedir.so umask=0077" }
+        regexp: "^session.*pam_.*mkhomedir.so",
+        line: "session     optional      pam_oddjob_mkhomedir.so umask=0077" }
     - { before: EOF,
         regexp: "^session.*pam_sss.so",
         line: "session     optional      pam_sss.so" }
@@ -83,8 +84,17 @@
         regexp: "^password.*pam_sss.so",
         line: "password    sufficient    pam_sss.so use_authtok" }
     - { before: "^session.*pam_succeed_if.so",
-        regexp: "^session.*pam_mkhomedir.so",
-        line: "session     optional      pam_mkhomedir.so umask=0077" }
+        regexp: "^session.*pam_.*mkhomedir.so",
+        line: "session     optional      pam_oddjob_mkhomedir.so umask=0077" }
     - { before: EOF,
         regexp: "^session.*pam_sss.so",
         line: "session     optional      pam_sss.so" }
+
+- name: Start and enable auth services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - sssd
+    - oddjobd

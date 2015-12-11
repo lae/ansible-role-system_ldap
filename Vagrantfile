@@ -9,6 +9,8 @@ Vagrant.configure(2) do |config|
   # See https://github.com/mitchellh/vagrant/issues/5005
   config.ssh.insert_key = false
 
+  config.vm.synced_folder ".", "/home/vagrant/sync/", disabled: true
+
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "test/playbook.yml"
