@@ -1,0 +1,15 @@
+#!/bin/bash
+# Just print out the secrets file as-is if the password file doesn't exist
+if [ ! -r '.vault_password' ]; then
+    cat "$1"
+    exit
+fi
+
+export PAGER='cat'
+CONTENT="$(ansible-vault view "$1" --vault-password-file=.vault_password 2>&1)"
+
+if echo "$CONTENT" | grep -q 'ERROR! input is not encrypted'; then
+    cat "$1"
+else
+    echo "$CONTENT"
+fi

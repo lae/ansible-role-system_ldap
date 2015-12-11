@@ -12,6 +12,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "test/playbook.yml"
-    ansible.ask_vault_pass = true
+    ansible.vault_password_file = ".vault_password"
   end
 end

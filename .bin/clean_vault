@@ -1,0 +1,23 @@
+#!/bin/bash
+# Just print out the secrets file as-is if the password file doesn't exist
+if [ ! -r '.vault_password' ]; then
+    cat
+    exit
+fi
+
+CONTENT="$(cat)"
+# Store vault's stderr in RESULT and redirect encrypted stdout back to stdout
+{
+    RESULT="$(echo "$CONTENT" | ansible-vault encrypt - --vault-password-file=.vault_password 2>&1 1>&$OUT)";
+} {OUT}>&1
+
+if echo "$RESULT" | grep -qP "Encryption successful|^$"; then
+    exit
+elif echo "$RESULT" | grep -q "ERROR! input is already encrypted"; then
+    echo "$CONTENT"
+else
+    # This should be unreachable, but just in case.
+    echo "RESULT=$RESULT" >> .gitdebug
+    echo "CONTENT=$CONTENT" >> .gitdebug
+    exit 1
+fi
