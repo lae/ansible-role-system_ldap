@@ -98,3 +98,17 @@
   with_items:
     - sssd
     - oddjobd
+
+- name: Add LDAP users to sudoers
+  template:
+    src: sudo_user.j2
+    dest: "/etc/sudoers.d/{{ item }}"
+    validate: "visudo -cf %s"
+  with_items: system_ldap_sudo_users
+
+- name: Add LDAP groups to sudoers
+  template:
+    src: sudo_group.j2
+    dest: "/etc/sudoers.d/{{ item }}"
+    validate: "visudo -cf %s"
+  with_items: system_ldap_sudo_groups
