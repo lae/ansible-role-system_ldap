@@ -1,0 +1,4 @@
+#{{ ansible_managed }}
+{% for user in system_ldap_sudo_users %}
+{{ user }} ALL=(ALL:ALL) ALL
+{% endfor %}
