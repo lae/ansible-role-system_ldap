@@ -19,6 +19,8 @@
     dest: /etc/sssd/sssd.conf
     mode: 0600
     backup: yes
+    owner: root
+    group: root
   notify:
     - restart sssd
 
