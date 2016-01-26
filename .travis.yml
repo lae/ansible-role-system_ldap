@@ -22,8 +22,9 @@ install:
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 
 script:
+  - ansible-playbook test/playbook.yml -i localhost, -u root
   # Basic role syntax check
-  - ansible-playbook tests/test.yml -i localhost, -u root --syntax-check
+  - ansible-playbook tests/playbook.yml -i localhost, -u root --syntax-check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[
