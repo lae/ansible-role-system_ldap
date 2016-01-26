@@ -31,6 +31,10 @@ before_script:
 script:
   # Basic role syntax check
   - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --syntax-check
+  # Test deployment
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root
+  # Validate deployment
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[
