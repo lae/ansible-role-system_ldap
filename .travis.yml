@@ -25,8 +25,11 @@ install:
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 
-before_script:
-  - echo "$VAULT_PASSWORD" > .vault_password
+  # Generate vault password file from encrypted env variable
+  - printf "$VAULT_PASSWORD" > .vault_password
+
+  # Disable host checking for localhost
+  - printf "Host localhost\n\tStrictHostKeyChecking no" >> ~/.ssh/config
 
 script:
   # Basic role syntax check
