@@ -30,7 +30,7 @@ before_script:
 
 script:
   # Basic role syntax check
-  - ansible-playbook test/playbook.yml -i localhost, -u root --syntax-check
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --syntax-check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[
