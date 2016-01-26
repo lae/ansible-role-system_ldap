@@ -3,7 +3,8 @@ language: python
 python: "2.7"
 
 # Don't use the new container infrastructure
-sudo: true
+sudo: required
+dist: trusty
 
 # Install ansible
 addons:
