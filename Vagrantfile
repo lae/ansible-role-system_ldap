@@ -16,5 +16,6 @@ Vagrant.configure(2) do |config|
     ansible.verbose = "v"
     ansible.playbook = "test/playbook.yml"
     ansible.vault_password_file = ".vault_password"
+    ansible.raw_arguments = ["--skip-tags fireeye_certs"]
   end
 end

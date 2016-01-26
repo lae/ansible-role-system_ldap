@@ -2,15 +2,15 @@
 language: python
 python: "2.7"
 
-# Don't use the new container infrastructure
-sudo: required
-dist: trusty
+# Use the new container infrastructure
+sudo: false
 
 # Install ansible
 addons:
   apt:
     packages:
     - python-pip
+    - vagrant
 
 env:
   global:
@@ -33,9 +33,7 @@ script:
   # Basic role syntax check
   - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --syntax-check
   # Test deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --connection=local --skip-tags fireeye_certs
-  # Validate deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --check --connection=local --skip-tags fireeye_certs
+  - vagrant up --provision
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[
