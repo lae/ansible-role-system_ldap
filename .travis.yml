@@ -22,6 +22,9 @@ install:
   # Check ansible version
   - ansible --version
 
+  # Update apt-cache
+  - apt-get update
+
   # Create ansible.cfg with correct roles_path
   - printf '[defaults]\nroles_path=../' >ansible.cfg
 
@@ -32,9 +35,9 @@ script:
   # Basic role syntax check
   - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --syntax-check
   # Test deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --connection=local
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --connection=local --skip-tags fireeye_certs
   # Validate deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --check --connection=local
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --check --connection=local --skip-tags fireeye_certs
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[
