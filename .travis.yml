@@ -28,16 +28,13 @@ install:
   # Generate vault password file from encrypted env variable
   - printf "$VAULT_PASSWORD" > .vault_password
 
-  # Disable host checking for localhost
-  - printf "Host localhost\n\tStrictHostKeyChecking no" >> ~/.ssh/config
-
 script:
   # Basic role syntax check
   - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --syntax-check
   # Test deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --connection=local
   # Validate deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --check
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --check --connection=local
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[
