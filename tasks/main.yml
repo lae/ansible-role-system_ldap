@@ -19,32 +19,24 @@
     name: http://builds.eng.fireeye.com/certs/fireeye-root-certs-1-1.noarch.rpm
     state: present
   when: ansible_os_family == 'RedHat'
-  tags:
-    - fireeye_certs
 
 - name: Add FireEye Labs apt repo key
   apt_key:
     url: http://packages.eng.fireeye.com/aptly/fireeye_labs/fireeye_labs.key
     state: present
   when: ansible_os_family == 'Debian'
-  tags:
-    - fireeye_certs
 
 - name: Add FireEye Labs apt repo
   apt_repository:
     repo: "deb http://packages.eng.fireeye.com/aptly/fireeye_labs jessie main"
     update_cache: yes
   when: ansible_os_family == 'Debian'
-  tags:
-    - fireeye_certs
 
 - name: Install FireEye Root certificates
   package:
     name: feye-root-certs
     state: present
   when: ansible_os_family == 'Debian'
-  tags:
-    - fireeye_certs
 
 - name: Copy SSSD configuration file
   template:
