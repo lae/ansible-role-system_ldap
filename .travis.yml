@@ -30,11 +30,11 @@ install:
 
 script:
   # Basic role syntax check
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --syntax-check
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --syntax-check
   # Test deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --connection=local
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --connection=local
   # Validate deployment
-  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password -u root --check --connection=local
+  - ansible-playbook test/playbook.yml -i localhost, --vault-password-file .vault_password --check --connection=local
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/[

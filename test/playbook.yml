@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  remote_user: vagrant
+  remote_user: root
   roles:
     - ansible-role-system_ldap
-  become: True
