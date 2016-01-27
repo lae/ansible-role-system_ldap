@@ -30,7 +30,7 @@ before_script:
 
 script:
   # Basic role syntax check
-  - ansible-playbook test/travis.yml -i localhost, --vault-password-file .vault_password --syntax-check
+  - ansible-playbook tests/travis.yml -i localhost, --vault-password-file .vault_password --syntax-check
 
 notifications:
-  webhooks: https://galaxy-qa.ansible.com/api/v1/notifications/
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
