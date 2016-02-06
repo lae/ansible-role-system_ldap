@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/fireeye-ops/ansible-role-system_ldap.svg?branch=master)](https://travis-ci.org/fireeye-ops/ansible-role-system_ldap)
+[![Galaxy Role](https://img.shields.io/badge/ansible--galaxy-system_ldap-blue.svg)](https://galaxy.ansible.com/fireeye-ops/system_ldap/)
+
 system_ldap
 =========
 
