@@ -4,5 +4,11 @@
   service:
     name: sssd
     state: restarted
+
 - name: run pam auth update
   shell: pam-auth-update --package
+
+- name: restart sshd
+  service:
+    name: sshd
+    state: restarted
