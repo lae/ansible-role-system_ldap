@@ -11,7 +11,7 @@
   package:
     name: "{{ item }}"
     state: latest
-  with_items: system_ldap_packages
+  with_items: "{{ system_ldap_packages }}"
 
 - name: Copy SSSD configuration file
   template:
@@ -99,7 +99,7 @@
     name: "{{ item }}"
     state: started
     enabled: yes
-  with_items: system_ldap_services
+  with_items: "{{ system_ldap_services }}"
 
 - name: Add LDAP users to sudoers
   template:
