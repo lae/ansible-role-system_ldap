@@ -8,6 +8,8 @@ system_ldap_uris: []
 system_ldap_bind_dn:
 system_ldap_bind_password:
 system_ldap_access_filter_groups: []
+system_ldap_access_unix_groups: []
 system_ldap_access_filter_users: []
 system_ldap_sudo_groups: []
 system_ldap_sudo_users: []
+system_ldap_allow_passwordauth_in_sshd: false
