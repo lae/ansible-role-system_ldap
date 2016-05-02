@@ -100,6 +100,7 @@
     regexp: 'pam_mkhomedir\.so'
     line: "session required pam_mkhomedir.so skel=/etc/skel/ umask=0022"
     state: present
+  when: ansible_os_family == 'Debian'
 
 - name: Start and enable auth services
   service:
