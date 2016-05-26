@@ -10,5 +10,5 @@
 
 - name: restart sshd
   service:
-    name: sshd
+    name: "{{ system_ldap_ssh_service }}"
     state: restarted

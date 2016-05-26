@@ -1,2 +1,3 @@
 ---
 # vars file for ansible-role-system_ldap
+system_ldap_ssh_service: sshd

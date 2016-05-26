@@ -1,0 +1,9 @@
+---
+# vars file for Debian-based distros
+system_ldap_packages:
+    - sssd
+    - sssd-ldap
+system_ldap_services:
+    - sssd
+system_ldap_cacert: ca-certificates.crt
+system_ldap_ssh_service: ssh
