@@ -38,6 +38,13 @@
     - netgroup
     - automount
 
+- name: Don't query SSSD for sudoers in nsswitch.conf
+  replace:
+    dest: /etc/nsswitch.conf
+    regexp: '^(sudoers.*)(\bsss)(\b.*)$'
+    replace: '\1 \3'
+    backup: yes
+
 - name: Query SSSD in pam.d/password-auth-ac
   lineinfile:
     dest: /etc/pam.d/password-auth-ac
