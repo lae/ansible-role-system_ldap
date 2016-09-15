@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/fireeye-ops/ansible-role-system_ldap.svg?branch=master)](https://travis-ci.org/fireeye-ops/ansible-role-system_ldap)
-[![Galaxy Role](https://img.shields.io/badge/ansible--galaxy-system_ldap-blue.svg)](https://galaxy.ansible.com/fireeye-ops/system_ldap/)
+[![Build Status](https://travis-ci.org/lae/ansible-role-system_ldap.svg?branch=master)](https://travis-ci.org/lae/ansible-role-system_ldap)
+[![Galaxy Role](https://img.shields.io/badge/ansible--galaxy-system_ldap-blue.svg)](https://galaxy.ansible.com/lae/system_ldap/)
 
 system_ldap
 =========
@@ -20,7 +20,7 @@ The following is typically what we use in a multi-tenant playbook:
 - hosts: all
   user: ansible
   roles:
-    - fireeye-ops.system_ldap
+    - lae.system_ldap
   become: True
 ```
 
