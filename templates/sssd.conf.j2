@@ -25,6 +25,7 @@ ldap_user_principal = userPrincipalName
 ldap_group_gid_number = gidNumber
 default_shell = /bin/bash
 override_homedir = /home/%u
+case_sensitive = false
 ldap_access_filter = (|{{ system_ldap_access_filter_groups | map('regex_replace', '^(?P<ldap_group>.*)$', '(memberOf=\\g<ldap_group>)') | join('') }}{{ system_ldap_access_filter_users | map('regex_replace', '^(?P<ldap_user>.*)$', '(sAMAccountName=\\g<ldap_user>)') | join('') }})
 
 [sssd]
