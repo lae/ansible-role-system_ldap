@@ -7,7 +7,7 @@
     - "{{ ansible_distribution|lower }}.yml"
     - "{{ ansible_os_family|lower }}.yml"
 
-- name: Install sssd and sssd-ldap
+- name: Install sssd, sssd-ldap, and sudo
   package:
     name: "{{ item }}"
     state: latest

@@ -3,6 +3,7 @@
 system_ldap_packages:
     - sssd
     - sssd-ldap
+    - sudo
 system_ldap_services:
     - sssd
 system_ldap_cacert: ca-certificates.crt
