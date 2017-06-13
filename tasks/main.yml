@@ -136,7 +136,7 @@
   notify:
     - run pam auth update
 
-- name: Allow password authentication in SSHD config for users
+- name: Allow/Disallow password authentication in SSHD config for users
   blockinfile:
     dest: /etc/ssh/sshd_config
     marker: "# {mark} ANSIBLE SYSTEM LDAP USER BLOCK"
@@ -144,11 +144,11 @@
       Match user {{ system_ldap_access_filter_users | join(",") }}
       PasswordAuthentication yes
     validate: "/usr/sbin/sshd -T -f '%s'"
-  when: "system_ldap_allow_passwordauth_in_sshd and system_ldap_access_filter_users"
+    state: "{{ 'present' if system_ldap_allow_passwordauth_in_sshd and system_ldap_access_filter_users else 'absent' }}"
   notify:
     - restart sshd
 
-- name: Allow password authentication in SSHD config for groups
+- name: Allow/Disallow password authentication in SSHD config for groups
   blockinfile:
     dest: /etc/ssh/sshd_config
     marker: "# {mark} ANSIBLE SYSTEM LDAP GROUP BLOCK"
@@ -156,6 +156,6 @@
       Match group {{ system_ldap_access_unix_groups | join(",") }}
       PasswordAuthentication yes
     validate: "/usr/sbin/sshd -T -f '%s'"
-  when: "system_ldap_allow_passwordauth_in_sshd and system_ldap_access_unix_groups"
+    state: "{{ 'present' if system_ldap_allow_passwordauth_in_sshd and system_ldap_access_unix_groups else 'absent' }}"
   notify:
     - restart sshd
