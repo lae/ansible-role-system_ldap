@@ -4,7 +4,6 @@
 id_provider = ldap
 auth_provider = ldap
 chpass_provider = ldap
-access_provider = ldap
 autofs_provider = ldap
 
 {# connection configuration #}
@@ -23,25 +22,41 @@ cache_credentials = True
 ldap_referrals = False
 
 {# filter configuration #}
+{% if system_ldap_group_search_filter %}
 ldap_group_search_filter = {{ system_ldap_group_search_filter }}
+{% endif %}
+{% if system_ldap_user_search_filter %}
 ldap_user_search_filter = {{ system_ldap_user_search_filter }}
+{% endif %}
+{% if system_ldap_group_search_base %}
+ldap_group_search_base = {{ system_ldap_group_search_base }}
+{% endif %}
+{% if system_ldap_user_search_base %}
+ldap_user_search_base = {{ system_ldap_user_search_base }}
+{% endif %}
+
 ldap_access_filter = (&(!(userAccountControl:1.2.840.113556.1.4.803:=2))(|{{ system_ldap_access_filter_groups | map('regex_replace', '^(?P<ldap_group>.*)$', '(memberOf=\\g<ldap_group>)') | join('') }}{{ system_ldap_access_filter_users | map('regex_replace', '^(?P<ldap_user>.*)$', '(sAMAccountName=\\g<ldap_user>)') | join('') }}))
 
 {# mapping/attribute configuration #}
-case_sensitive = false
-ldap_user_name = sAMAccountName
-ldap_user_principal = userPrincipalName
-ldap_user_gecos = title
-ldap_user_object_class = user
-ldap_group_object_class = group
-ldap_user_uid_number = uidNumber
-ldap_user_gid_number = gidNumber
-ldap_group_gid_number = gidNumber
-ldap_pwd_policy = none
+case_sensitive = {{ system_ldap_case_sensitive }}
+ldap_user_name = {{ system_ldap_user_name }}
+ldap_user_principal = {{ system_ldap_user_principal }}
+ldap_user_gecos = {{ system_ldap_user_gecos }}
+ldap_user_object_class = {{ system_ldap_user_object_class }}
+ldap_group_name = {{ system_ldap_group_name }}
+ldap_group_object_class = {{ system_ldap_group_object_class }}
+ldap_user_uid_number = {{ system_ldap_user_uid_number }}
+ldap_user_gid_number = {{ system_ldap_user_gid_number }}
+ldap_group_gid_number = {{ system_ldap_group_gid_number }}
+ldap_pwd_policy = {{ system_ldap_pwd_policy }}
 default_shell = /bin/bash
 override_homedir = /home/%u
 
 krb5_realm = {{ system_ldap_krb5_realm | default(system_ldap_domain, true) }}
+
+{% if system_ldap_tls_reqcert %}
+ldap_tls_reqcert = {{ system_ldap_tls_reqcert }}
+{% endif %}
 
 [sssd]
 services = nss, pam, autofs
