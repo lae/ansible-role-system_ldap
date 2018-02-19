@@ -1,5 +1,10 @@
 ---
-# defaults file for ansible-role-system_ldap
+# defaults file for lae.system_ldap
+system_ldap_sudo_groups: []
+system_ldap_sudo_users: []
+system_ldap_allow_passwordauth_in_sshd: false
+# The following are used to populate sssd.conf (see templates/sssd.conf.j2)
+# Refer to `man sssd-ldap` (https://linux.die.net/man/5/sssd-ldap) for usage.
 system_ldap_domain:
 system_ldap_schema: ad
 system_ldap_krb5_realm:
@@ -9,16 +14,12 @@ system_ldap_bind_dn:
 system_ldap_bind_password:
 system_ldap_user_search_filter: "(&(objectClass=user)(objectClass=person)(uid=*))"
 system_ldap_group_search_filter: "(&(objectClass=group)(gidNumber=*))"
-system_ldap_user_search_base: 
-system_ldap_group_search_base: 
+system_ldap_user_search_base:
+system_ldap_group_search_base:
 system_ldap_access_filter_groups: []
 system_ldap_access_unix_groups: []
 system_ldap_access_filter_users: []
-system_ldap_sudo_groups: []
-system_ldap_sudo_users: []
-system_ldap_allow_passwordauth_in_sshd: false
 system_ldap_tls_reqcert:
-
 system_ldap_case_sensitive: false
 system_ldap_user_name: sAMAccountName
 system_ldap_user_principal: userPrincipalName
