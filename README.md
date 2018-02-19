@@ -16,6 +16,7 @@ be defined in this section.
 The following must be configured to communicate to your LDAP/AD server:
 
 |Variable|Example|Description|
+|--------|-------|-----------|
 |`system_ldap_domain`|`LDAP`|A label for sssd to use to identify this configuration/domain.
 |`system_ldap_search_base`|`OU=Idol Schools,DC=Aikatsu,DC=net`|The default base DN to use for performing LDAP user operations.|
 |`system_ldap_uris`|`- ldaps://ldap-tyo.example.aikatsu.net:636<br />- ldaps://ldap-ngo.example.aikatsu.net:636`|A list of URIs of the LDAP servers to which sssd should connect.|
