@@ -19,12 +19,12 @@ The following must be configured to communicate to your LDAP/AD server:
 |--------|-------|-----------|
 |`system_ldap_domain`|`LDAP`|A label for sssd to use to identify this configuration/domain.
 |`system_ldap_search_base`|`OU=Idol Schools,DC=Aikatsu,DC=net`|The default base DN to use for performing LDAP user operations.|
-|`system_ldap_uris`|`- ldaps://ldap-tyo.example.aikatsu.net:636<br />- ldaps://ldap-ngo.example.aikatsu.net:636`|A list of URIs of the LDAP servers to which sssd should connect.|
+|`system_ldap_uris`|`- ldaps://ldap-tyo.example.aikatsu.net:636`<br />`- ldaps://ldap-ngo.example.aikatsu.net:636`|A list of URIs of the LDAP servers to which sssd should connect.|
 |`system_ldap_bind_dn`|`CN=Naoto Suzukawa,OU=Service Accounts,OU=Idol Schools,DC=Aikatsu,DC=net`|The default bind DN to use for performing LDAP operations.|
 |`system_ldap_bind_password`|`sunrise`|The authentication token of the default bind DN. Only clear text passwords are currently supported.|
 |`system_ldap_access_filter_groups`|`- CN=operations,OU=Security Groups,OU=Idol Schools,DC=Aikatsu,DC=net`|List of group DNs authorized to access the current host.|
 |`system_ldap_access_unix_groups`|`- operations`|Should effectively be the same as `system_ldap_access_filter_groups`, but using their UNIX group names (usually CN).|
-|`system_ldap_access_filter_users`|`- hoshimiya.ichigo<br />- nikaidou.yuzu`|List of usernames (passed to the filter `(sAMAccountName=%s)` by default) authorized to access the current host.|
+|`system_ldap_access_filter_users`|`- hoshimiya.ichigo`<br />`- nikaidou.yuzu`|List of usernames (passed to the filter `(sAMAccountName=%s)` by default) authorized to access the current host.|
 |`system_ldap_sudo_groups`|`- operations`|List of groups to configure to allow sudo usage on the current host.|
 |`system_ldap_sudo_users`|`- hoshimiya.ichigo`|List of users to configure to allow sudo usage on the current host.|
 |`system_ldap_allow_passwordauth_in_sshd`|`true`|Specifies whether to configure `sshd_config` to allow password authentication for authorized users. This is needed if your SSHD is configured to not allow password authentication by default. Defaults to `false`.|
