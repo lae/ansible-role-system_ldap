@@ -128,7 +128,7 @@ To keep track of ansible vault changes, include .gitconfig in your git config:
 Testing
 -------
 
-    vagrant box add centos/7
+    vagrant box add debian/stretch64
     vagrant up
     vagrant provision
 
