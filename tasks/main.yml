@@ -45,9 +45,9 @@
     replace: '\1 \3'
     backup: yes
 
-- name: Query SSSD in pam.d/password-auth-ac
+- name: Query SSSD in pam.d/password-auth
   lineinfile:
-    dest: /etc/pam.d/password-auth-ac
+    dest: /etc/pam.d/password-auth
     insertbefore: "{{ item.before }}"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
@@ -73,9 +73,9 @@
         line: "session     optional      pam_sss.so" }
   when: ansible_os_family == 'RedHat'
 
-- name: Query SSSD in pam.d/system-auth-ac
+- name: Query SSSD in pam.d/system-auth
   lineinfile:
-    dest: /etc/pam.d/system-auth-ac
+    dest: /etc/pam.d/system-auth
     insertbefore: "{{ item.before }}"
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
