@@ -153,7 +153,7 @@
     dest: /etc/ssh/sshd_config
     marker: "# {mark} ANSIBLE SYSTEM LDAP GROUP BLOCK"
     block: |
-      Match group {{ system_ldap_access_unix_groups | join(",") }}
+      Match group "{{ system_ldap_access_unix_groups | join(",") }}"
       PasswordAuthentication yes
     validate: "/usr/sbin/sshd -T -f '%s'"
     state: "{{ 'present' if system_ldap_allow_passwordauth_in_sshd and system_ldap_access_unix_groups else 'absent' }}"
