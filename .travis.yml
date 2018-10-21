@@ -32,13 +32,8 @@ script:
   # Basic role syntax check
   - ansible-playbook tests/travis.yml -i localhost, --vault-password-file .vault_password --syntax-check
 
-after_success:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-  - bash send.sh success $DISCORD_WEBHOOK
-
-after_failure:
-  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
-  - bash send.sh failure $DISCORD_WEBHOOK
-
 notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  webhooks:
+    urls:
+      - https://galaxy.ansible.com/api/v1/notifications/
+      - https://t2d.idolactiviti.es/notify
