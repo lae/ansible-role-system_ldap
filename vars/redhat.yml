@@ -7,5 +7,6 @@ system_ldap_packages:
     - oddjob-mkhomedir
 system_ldap_services:
     - sssd
+    - messagebus
     - oddjobd
 system_ldap_cacert: ca-bundle.crt
