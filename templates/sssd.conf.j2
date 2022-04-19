@@ -38,6 +38,7 @@ ldap_user_search_base = {{ system_ldap_user_search_base }}
 ldap_access_filter = (&(!(userAccountControl:1.2.840.113556.1.4.803:=2))(|{{ system_ldap_access_filter_groups | map('regex_replace', '^(?P<ldap_group>.*)$', '(memberOf=\\g<ldap_group>)') | join('') }}{{ system_ldap_access_filter_users | map('regex_replace', '^(?P<ldap_user>.*)$', '(sAMAccountName=\\g<ldap_user>)') | join('') }}))
 
 {# mapping/attribute configuration #}
+{% if system_ldap_schema == "ad" %}
 case_sensitive = {{ system_ldap_case_sensitive }}
 ldap_user_name = {{ system_ldap_user_name }}
 ldap_user_principal = {{ system_ldap_user_principal }}
@@ -50,8 +51,8 @@ ldap_user_gid_number = {{ system_ldap_user_gid_number }}
 ldap_group_gid_number = {{ system_ldap_group_gid_number }}
 ldap_pwd_policy = {{ system_ldap_pwd_policy }}
 default_shell = /bin/bash
-override_homedir = /home/%u
-
+fallback_homedir = /home/%u
+{% endif %}
 krb5_realm = {{ system_ldap_krb5_realm | default(system_ldap_domain, true) }}
 
 {% if system_ldap_tls_reqcert %}
