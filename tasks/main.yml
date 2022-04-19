@@ -10,7 +10,7 @@
 - name: Install sssd, sssd-ldap, and sudo
   package:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items: "{{ system_ldap_packages }}"
 
 - name: Copy SSSD configuration file
