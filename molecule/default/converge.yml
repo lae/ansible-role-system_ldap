@@ -1,6 +1,17 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: instance2
+  vars:
+    system_ldap_domain: "LDAP"
+    system_ldap_search_base: "dc=example.com,dc=ldap"
+    system_ldap_schema: "rfc2307"
+    system_ldap_uris:
+      - "ldap://instance1"
+    system_ldap_bind_dn: "cn=root,ou=admin,dc=ldap"
+    system_ldap_bind_password: "password"
+    system_ldap_group_search_filter: ''
+    system_ldap_user_search_filter: ''
+    system_ldap_start_tls: false
   pre_tasks:
     - name: Update apt cache.
       apt:
