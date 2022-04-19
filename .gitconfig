@@ -1,5 +1,0 @@
-[diff "vault"]
-	textconv = .bin/diff_vault
-[filter "vault"]
-	smudge = .bin/smudge_vault
-	clean = .bin/clean_vault
