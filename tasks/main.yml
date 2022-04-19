@@ -18,7 +18,7 @@
     src: sssd.conf.j2
     dest: /etc/sssd/sssd.conf
     mode: 0600
-    backup: yes
+    backup: true
     owner: root
     group: root
   notify:
@@ -29,7 +29,7 @@
     dest: /etc/nsswitch.conf
     regexp: '^({{ item }}(?!.*\bsss\b).*)$'
     replace: '\1 sss'
-    backup: yes
+    backup: true
   with_items:
     - passwd
     - shadow
@@ -43,7 +43,7 @@
     dest: /etc/nsswitch.conf
     regexp: '^(sudoers.*)(\bsss)(\b.*)$'
     replace: '\1 \3'
-    backup: yes
+    backup: true
 
 - name: Query SSSD in pam.d/password-auth
   lineinfile:
@@ -113,7 +113,7 @@
   service:
     name: "{{ item }}"
     state: started
-    enabled: yes
+    enabled: true
   with_items: "{{ system_ldap_services }}"
 
 - name: Add LDAP users to sudoers

@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: j1ngk3
   description: Install and configure SSSD for system-level LDAP authentication
