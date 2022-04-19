@@ -1,0 +1,18 @@
+---
+- name: Set up ldap on instance1
+  hosts: instance1 
+  tasks:
+    - name: Update apt cache.
+      apt:
+        update_cache: true
+        cache_valid_time: 600
+      when: ansible_os_family == 'Debian'
+
+    - name: Install python-ldap requirement
+      package:
+        name: python3-ldap
+        state: present
+
+    - name: Run base ldap role
+      include_role:
+        name: j1ngk3.ldap
