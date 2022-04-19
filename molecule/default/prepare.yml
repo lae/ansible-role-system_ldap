@@ -1,6 +1,6 @@
 ---
 - name: Set up ldap on instance1
-  hosts: instance1 
+  hosts: instance1
   tasks:
     - name: Update apt cache.
       apt:
