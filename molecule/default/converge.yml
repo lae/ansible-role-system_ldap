@@ -1,5 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  pre_tasks:
+    - name: Update apt cache.
+      apt:
+        update_cache: true
+        cache_valid_time: 600
   roles:
     - role: j1ngk3.sssd_ldap
