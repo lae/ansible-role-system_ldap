@@ -27,7 +27,6 @@ The following must be configured to communicate to your LDAP/AD server:
 |`system_ldap_access_filter_users`|`- hoshimiya.ichigo`<br />`- nikaidou.yuzu`|List of usernames (passed to the filter `(sAMAccountName=%s)` by default) authorized to access the current host.|
 |`system_ldap_sudo_groups`|`- operations`|List of groups to configure to allow sudo usage on the current host.|
 |`system_ldap_sudo_users`|`- hoshimiya.ichigo`|List of users to configure to allow sudo usage on the current host.|
-|`system_ldap_allow_passwordauth_in_sshd`|`true`|Specifies whether to configure `sshd_config` to allow password authentication for authorized users. This is needed if your SSHD is configured to not allow password authentication by default. Defaults to `false`.|
 
 ## Example Playbook
 
