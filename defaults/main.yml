@@ -2,7 +2,6 @@
 # defaults file for lae.system_ldap
 system_ldap_sudo_groups: []
 system_ldap_sudo_users: []
-system_ldap_allow_passwordauth_in_sshd: false
 # The following are used to populate sssd.conf (see templates/sssd.conf.j2)
 # Refer to `man sssd-ldap` (https://linux.die.net/man/5/sssd-ldap) for usage.
 system_ldap_domain:
@@ -31,3 +30,4 @@ system_ldap_user_uid_number: uidNumber
 system_ldap_user_gid_number: gidNumber
 system_ldap_group_gid_number: gidNumber
 system_ldap_pwd_policy: none
+system_ldap_start_tls: true
