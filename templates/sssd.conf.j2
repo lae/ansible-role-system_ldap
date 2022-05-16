@@ -10,7 +10,7 @@ autofs_provider = ldap
 ldap_schema = {{ system_ldap_schema }}
 ldap_uri = {{ system_ldap_uris | join(',') }}
 ldap_tls_cacertdir = /etc/ssl/certs
-ldap_tls_cacert = /etc/ssl/certs/{{ system_ldap_cacert }}
+ldap_tls_cacert = {{ system_ldap_cacert }}
 ldap_id_use_start_tls = {{ system_ldap_start_tls }}
 
 {# search configuration #}

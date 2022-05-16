@@ -9,4 +9,4 @@ system_ldap_services:
     - sssd
     - messagebus
     - oddjobd
-system_ldap_cacert: ca-bundle.crt
+system_ldap_cacert_os_spec: ca-bundle.crt
