@@ -12,6 +12,7 @@ ldap_uri = {{ system_ldap_uris | join(',') }}
 ldap_tls_cacertdir = /etc/ssl/certs
 ldap_tls_cacert = {{ system_ldap_cacert }}
 ldap_id_use_start_tls = {{ system_ldap_start_tls }}
+ldap_auth_disable_tls_never_use_in_production = {{ system_ldap_disable_tls_never_use_in_production }}
 
 {# search configuration #}
 ldap_search_base = {{ system_ldap_search_base }}

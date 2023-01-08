@@ -31,5 +31,6 @@ system_ldap_user_gid_number: gidNumber
 system_ldap_group_gid_number: gidNumber
 system_ldap_pwd_policy: none
 system_ldap_start_tls: true
+system_ldap_disable_tls_never_use_in_production: false
 system_ldap_cacert_dir: /etc/ssl/certs
 system_ldap_cacert: "{{ system_ldap_cacert_dir }}/{{ system_ldap_cacert_os_spec }}"
